@@ -1000,7 +1000,7 @@ api.getJSON = function (options, objOptions, callback) {
             return callback(new Error('Failed to execute request: ' + (obj && obj.message !== 'undefined' ? obj.message : 'Unauthorized')));
           }
           else {
-            console.log('N/A Request error', res.statusCode, output)
+            console.log('N/A Request error', res.statusCode, output);
             return callback(new Error('Failed to execute request: ' + (obj && obj.message ? obj.message : obj || 'n/a')));
           }
         });
@@ -1008,12 +1008,13 @@ api.getJSON = function (options, objOptions, callback) {
 
       timerID = setTimeout(function () {
         aborted = true;
+        joolaio.logger.warn('Aborting Ajax request due to timeout.');
         //Aborting the xhr of http(s)-browserify
         if (req.xhr)
           req.xhr.abort();
         else
           req.abort();
-      }, options.timeout || joolaio.options.timeout || 15000);
+      }, options.timeout || joolaio.options.timeout || 60000);
 
       req.on('error', function (err) {
         return callback(err);
@@ -1048,8 +1049,6 @@ api.getJSON = function (options, objOptions, callback) {
       objOptions.APIToken = joolaio.APITOKEN;
     objOptions._path = options.path;
 
-    var length = joola.common.roughSizeOfObject(objOptions);
-    joolaio.logger.trace('WS emit [' + routeID + '][' + options.path + '], length: ' + length + 'bytes');
     joolaio.io.socket.emit(routeID, objOptions);
 
     if (objOptions && (objOptions.realtime || (objOptions.options && objOptions.options.realtime)))
@@ -1325,40 +1324,6 @@ common.parse = function (string, callback) {
 common.hash = function (string) {
   return require('crypto').createHash('md5').update(string).digest("hex");
 };
-
-common.roughSizeOfObject = function (object) {
-  var objectList = [];
-
-  var recurse = function (value) {
-    var bytes = 0;
-
-    if (typeof value === 'boolean') {
-      bytes = 4;
-    }
-    else if (typeof value === 'string') {
-      bytes = value.length * 2;
-    }
-    else if (typeof value === 'number') {
-      bytes = 8;
-    }
-    else if
-      (
-      typeof value === 'object'
-      && objectList.indexOf(value) === -1
-      ) {
-      objectList[ objectList.length ] = value;
-
-      for (i in value) {
-        bytes += 8; // an assumed existence overhead
-        bytes += recurse(value[i])
-      }
-    }
-
-    return bytes;
-  };
-
-  return recurse(object);
-};
 },{"./modifiers":9,"cloneextend":53,"crypto":26,"util":52}],8:[function(require,module,exports){
 /**
  *  @title joola.io
@@ -1381,7 +1346,6 @@ logger._log = function (level, message, callback) {
     case 'warn':
     case 'error':
       break;
-    case 'trace':
     case 'silly':
       level = 'debug';
       break;
