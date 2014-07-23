@@ -1,5 +1,5 @@
 /**
- *  @title joola.io
+ *  @title joola
  *  @overview the open-source data analytics framework
  *  @copyright Joola Smart Solutions, Ltd. <info@joo.la>
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
@@ -95,7 +95,7 @@ if (isBrowser()) {
   Object.keys(elems).forEach(function (key) {
     var scr = elems[key];
     if (scr.src) {
-      if (scr.src.indexOf('joola.io.js') > -1 || scr.src.indexOf('joola.io.min.js') > -1) {
+      if (scr.src.indexOf('joola.js') > -1 || scr.src.indexOf('joola.min.js') > -1) {
         var parts = require('url').parse(scr.src);
         joolaio.options.host = parts.protocol + '//' + parts.host;
         if (parts.query) {
@@ -189,7 +189,7 @@ joolaio.init = function (options, callback) {
         //done('css');
       };
       css.rel = 'stylesheet';
-      css.href = joolaio.options.host + '/joola.io.css';
+      css.href = joolaio.options.host + '/joola.css';
       document.head.appendChild(css);
       done('css');
       if (expected === 0)
@@ -213,7 +213,7 @@ joolaio.init = function (options, callback) {
       }
     }
     joolaio.events.emit('core.init.start');
-    joolaio.logger.info('Starting joola.io client SDK, version ' + joolaio.VERSION);
+    joolaio.logger.info('Starting joola client SDK, version ' + joolaio.VERSION);
 
     //else if (joolaio.options.isBrowser) {
     if (!joolaio.options.host && joolaio.options.isBrowser) {
@@ -221,7 +221,7 @@ joolaio.init = function (options, callback) {
     }
 
     if (!joolaio.options.host)
-      throw new Error('joola.io host not specified');
+      throw new Error('joola host not specified');
 
     //var io = require('socket.io-browserify');
     var io = require('socket.io-client');

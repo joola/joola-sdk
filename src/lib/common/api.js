@@ -1,9 +1,9 @@
 /**
- *  @title joola.io/lib/sdk/common/api
+ *  @title joola/lib/sdk/common/api
  *  @copyright (c) Joola Smart Solutions, Ltd. <info@joo.la>
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>. Some rights reserved. See LICENSE, AUTHORS
  *
- *  Provides the SDK with a centralized management for consuming data from a joola.io
+ *  Provides the SDK with a centralized management for consuming data from a joola
  *  node. All API calls are routed through this interface.
  **/
 

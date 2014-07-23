@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       },*/
       client: {
         src: ['src/lib/index.js'],
-        dest: 'build/temp/joola.io.js',
+        dest: 'build/temp/joola.js',
         options: {
           external: []
         }
@@ -54,7 +54,7 @@ module.exports = function (grunt) {
       },
       all: {
         src: ['./src/lib/index.js'],
-        dest: 'build/release/joola.io.js'
+        dest: 'build/release/joola.js'
       }
     },
 
@@ -73,8 +73,8 @@ module.exports = function (grunt) {
     },
 
     concat: {
-      'build/release/joola.io.js': ['build/temp/joola.io.js'],
-      'build/temp/joola.io.css': ['src/css/**/*.css']
+      'build/release/joola.js': ['build/temp/joola.js'],
+      'build/temp/joola.css': ['src/css/**/*.css']
     },
 
     uglify: {
@@ -83,11 +83,11 @@ module.exports = function (grunt) {
         mangle: true,
         compress: true,
         sourceMap: true,
-        sourceMapName: 'build/release/joola.io.min.js.map'
+        sourceMapName: 'build/release/joola.min.js.map'
       },
       build: {
-        src: 'build/release/joola.io.js',
-        dest: 'build/release/joola.io.min.js'
+        src: 'build/release/joola.js',
+        dest: 'build/release/joola.min.js'
       }
     },
 
@@ -101,15 +101,15 @@ module.exports = function (grunt) {
         options: {
           keepSpecialComments: 1
         },
-        src: 'build/temp/joola.io.css',
-        dest: 'build/release/joola.io.min.css'
+        src: 'build/temp/joola.css',
+        dest: 'build/release/joola.min.css'
       }
     },
 
     copy: {
       main: {
-        src: 'build/temp/joola.io.css',
-        dest: 'build/release/joola.io.css'
+        src: 'build/temp/joola.css',
+        dest: 'build/release/joola.css'
       }
     },
 
@@ -156,7 +156,7 @@ module.exports = function (grunt) {
           build: process.env.TRAVIS_JOB_ID || Math.floor((new Date).getTime() / 1000 - 1230768000).toString(),
           browsers: browsers,
           'tunnel-identifier': process.env.TRAVIS_JOB_ID || Math.floor((new Date).getTime() / 1000 - 1230768000).toString(),
-          testname: process.env.TRAVIS_COMMIT ? 'joola.io.sdk, commit: ' + process.env.TRAVIS_COMMIT : "joola.io.sdk tests",
+          testname: process.env.TRAVIS_COMMIT ? 'joola.sdk, commit: ' + process.env.TRAVIS_COMMIT : "joola.sdk tests",
           tags: [process.env.TRAVIS_BRANCH || 'local']
         }
       }

@@ -1,8 +1,8 @@
 /**
- *  @title joola.io/lib/common/modifiers
- *  @overview Includes different prototype modifiers used by joola.io
+ *  @title joola/lib/common/modifiers
+ *  @overview Includes different prototype modifiers used by joola
  *  @description
- *  joola.io requires some additional support for prototype modification, for example, extending Date to support format.
+ *  joola requires some additional support for prototype modification, for example, extending Date to support format.
  *
  *  @copyright (c) Joola Smart Solutions, Ltd. <info@joo.la>
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>. Some rights reserved. See LICENSE, AUTHORS
@@ -92,37 +92,3 @@ Object.defineProperty(Error.prototype, 'toJSON', {
   },
   configurable: true
 });
-/*
-Array.prototype.clone = function () {
-  return this.slice(0);
-};
-
-
-var stringify = require('json-stringify-safe');
-
-
-JSON._parse = JSON.parse.clone();
-JSON.parse = function (obj) {
-  var start = new Date().getTime();
-  var result = JSON._parse(obj);
-  var end = new Date().getTime();
-  if (end - start > 50) {
-    console.log('BLOCKING PARSE: ' + (end - start).toString() + 'ms');
-    console.trace();
-  }
-  return result;
-};
-
-
-JSON._stringify = stringify.clone();
-JSON.stringify = function (obj) {
-  var start = new Date().getTime();
-  var result = JSON._stringify(obj);
-  var end = new Date().getTime();
-  if (end - start > 50) {
-    console.log('BLOCKING STRINGIFY: ' + (end - start).toString() + 'ms');
-    console.trace();
-  }
-  return result;
-};
-*/
